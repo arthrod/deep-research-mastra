@@ -2,6 +2,10 @@ output.txt
 node_modules
 dist
 .mastra
+.wrangler
+.dev.vars
+worker-configuration.d.ts
+src/routeTree.gen.ts
 .env.development
 .env
 *.db

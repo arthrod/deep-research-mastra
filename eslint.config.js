@@ -103,6 +103,7 @@ export default [
       '.mastra/**',
       'eslint.config.js',
       'vitest.config.ts',
+      'src/routeTree.gen.ts',
 
       "vite.config.ts"
     ]
