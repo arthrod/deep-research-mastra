@@ -16,10 +16,49 @@ api.get('/health', (c) =>
   c.json({ status: 'ok', service: 'deep-research-mastra', time: new Date().toISOString() }),
 )
 
-const proxyToMastra = async (c: {
-  env: Bindings
-  req: { method: string; path: string; url: string; raw: Request }
-}, prefixToStrip: string): Promise<Response> => {
+const STRIPPED_HEADERS = new Set([
+  'cookie',
+  'set-cookie',
+  'host',
+  'connection',
+  'content-length',
+  'x-forwarded-for',
+  'x-forwarded-host',
+  'x-forwarded-proto',
+  'x-real-ip',
+])
+
+const sanitizeHeaders = (incoming: Headers): Headers => {
+  const out = new Headers()
+  incoming.forEach((value, key) => {
+    const lower = key.toLowerCase()
+    if (STRIPPED_HEADERS.has(lower)) {
+      return
+    }
+    if (lower.startsWith('cf-')) {
+      return
+    }
+    out.set(key, value)
+  })
+  return out
+}
+
+const buildUpstreamUrl = (base: string, requestUrl: string, prefixToStrip: string): URL => {
+  const upstream = new URL(base)
+  const reqUrl = new URL(requestUrl)
+  const rawSuffix = reqUrl.pathname.slice(prefixToStrip.length)
+  const normalizedSuffix = '/' + rawSuffix.replace(/^\/+/, '')
+  const basePath = upstream.pathname.replace(/\/+$/, '')
+  upstream.pathname = basePath + normalizedSuffix
+  upstream.search = reqUrl.search
+  upstream.hash = ''
+  return upstream
+}
+
+const proxyToMastra = async (
+  c: { env: Bindings; req: { method: string; url: string; raw: Request } },
+  prefixToStrip: string,
+): Promise<Response> => {
   const base = c.env.MASTRA_BASE_URL
   if (base === undefined || base === '') {
     return new Response(
@@ -29,17 +68,15 @@ const proxyToMastra = async (c: {
       { status: 503, headers: { 'content-type': 'application/json' } },
     )
   }
-  const path = c.req.path.slice(prefixToStrip.length)
-  const search = new URL(c.req.url).search
-  const target = base.replace(/\/+$/, '') + path + search
+  const upstream = buildUpstreamUrl(base, c.req.url, prefixToStrip)
   const init: RequestInit = {
     method: c.req.method,
-    headers: c.req.raw.headers,
+    headers: sanitizeHeaders(c.req.raw.headers),
   }
   if (!['GET', 'HEAD'].includes(c.req.method)) {
     init.body = await c.req.raw.arrayBuffer()
   }
-  return fetch(target, init)
+  return fetch(upstream.toString(), init)
 }
 
 api.get('/agents', (c) => proxyToMastra(c, '/api'))
