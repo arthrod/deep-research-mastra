@@ -5,6 +5,7 @@ dist
 .wrangler
 .dev.vars
 worker-configuration.d.ts
+src/routeTree.gen.ts
 .env.development
 .env
 *.db
