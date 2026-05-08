@@ -11,7 +11,7 @@ const mcpAgent = new Agent({
   id: "mcp-agent",
   name: "Multi-tool Agent",
   instructions: "You help users check stocks and weather.",
-  model: google("gemini-2.5-flash"),
+  model: google("gemini-3.1-flash-lite-preview"),
   memory: createResearchMemory()
 });
 

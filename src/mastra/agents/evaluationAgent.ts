@@ -36,7 +36,7 @@ export const evaluationAgent = new Agent({
   - isRelevant: boolean indicating if the result is relevant
   - reason: brief explanation of your decision
   `,
-  model: google('gemini-2.5-flash-lite'),
+  model: google('gemini-3.1-flash-lite-preview'),
   memory,
   evals: {
     contentSimilarity: new ContentSimilarityMetric({ ignoreCase: true, ignoreWhitespace: true }),

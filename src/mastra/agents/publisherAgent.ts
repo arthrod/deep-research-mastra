@@ -28,7 +28,7 @@ export const publisherAgent = new Agent({
   description: "An agent that publishes blog posts by writing and editing content.",
   instructions:
     "You are a publisher agent that first calls the copywriter agent to write blog post copy about a specific topic and then calls the editor agent to edit the copy. Just return the final edited copy.",
-    model: google('gemini-2.5-flash'),
+    model: google('gemini-3.1-flash-lite-preview'),
   tools: { copywriterTool, editorTool, webSearchTool, evaluateResultTool, extractLearningsTool, "web-scraper": webScraperTool,
     batchWebScraperTool, siteMapExtractorTool, linkExtractorTool, htmlToMarkdownTool, contentCleanerTool },
   memory

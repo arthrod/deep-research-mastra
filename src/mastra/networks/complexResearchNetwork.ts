@@ -33,7 +33,7 @@ export const complexResearchNetwork = new NewAgentNetwork({
   - Always aim to provide the most complete and accurate response possible by combining the strengths of your specialized components.
   - If a task involves multiple stages (e.g., research then report), consider which workflow (e.g., 'generateReportWorkflow') can handle the entire sequence.
   `,
-  model: google('gemini-2.5-flash-lite'),
+  model: google('gemini-3.1-flash-lite-preview'),
   agents: {
     ragAgent,
     researchAgent,

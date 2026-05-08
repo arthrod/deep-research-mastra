@@ -17,7 +17,7 @@
  * @example Correct thinking config usage:
  * ```typescript
  * const result = await generateText({
- *   model: google('gemini-2.5-flash-lite-preview-06-17'),
+ *   model: google('gemini-3.1-flash-lite-preview'),
  *   providerOptions: {
  *     google: {
  *       thinkingConfig: { thinkingBudget: 2048 }
@@ -53,11 +53,11 @@ export const GEMINI_CONFIG = {
   // Latest Gemini 2.5 models with advanced capabilities
   MODELS: {
     // Main model - Latest 2.5 Flash Lite with 1M context, thinking, and all features
-    GEMINI_2_5_FLASH_LITE: 'gemini-2.5-flash-lite-preview-06-17', // Primary model
-    GEMINI_2_5_PRO_PREVIEW: 'gemini-2.5-pro-preview-05-06',
-    GEMINI_2_5_FLASH_PREVIEW: 'gemini-2.5-flash-preview-05-20',
-    GEMINI_2_5_PRO: 'gemini-2.5-pro',
-    GEMINI_2_5_FLASH: 'gemini-2.5-flash',
+    GEMINI_2_5_FLASH_LITE: 'gemini-3.1-flash-lite-preview', // Primary model
+    GEMINI_2_5_PRO_PREVIEW: 'gemini-3.1-flash-lite-preview',
+    GEMINI_2_5_FLASH_PREVIEW: 'gemini-3.1-flash-lite-preview',
+    GEMINI_2_5_PRO: 'gemini-3.1-flash-lite-preview',
+    GEMINI_2_5_FLASH: 'gemini-3.1-flash-lite-preview',
   },
 
   // Embedding models with dimension support
@@ -99,12 +99,12 @@ export const GEMINI_CONFIG = {
  * @see https://ai.google.dev/gemini-api/docs/caching
  */
 export type GoogleModelCacheableId =
-  | 'gemini-2.5-pro-preview-05-06'     // Your GEMINI_2_5_PRO
-  | 'gemini-2.5-flash-preview-05-20'   // Your GEMINI_2_5_FLASH
-  | 'gemini-2.5-flash-lite-preview-06-17' // Your GEMINI_2_5_FLASH_LITE
-  | 'gemini-2.5-pro'            // Standard API format
-  | 'gemini-2.5-flash'
-  | 'gemini-2.5-flash-lite'
+  | 'gemini-3.1-flash-lite-preview'     // Your GEMINI_2_5_PRO
+  | 'gemini-3.1-flash-lite-preview'   // Your GEMINI_2_5_FLASH
+  | 'gemini-3.1-flash-lite-preview' // Your GEMINI_2_5_FLASH_LITE
+  | 'gemini-3.1-flash-lite-preview'            // Standard API format
+  | 'gemini-3.1-flash-lite-preview'
+  | 'gemini-3.1-flash-lite-preview'
   | 'gemini-2.5-flash-image-preview'
   | 'gemini-2.0-flash'
   | 'gemini-1.5-flash-001'
@@ -248,13 +248,13 @@ export const baseGoogleModel = (
  *
  * @example Basic usage:
  * ```typescript
- * const model = createGemini25Provider('gemini-2.5-flash-lite-preview-06-17');
+ * const model = createGemini25Provider('gemini-3.1-flash-lite-preview');
  * ```
  *
  * @example With thinking config (use in generateText):
  * ```typescript
  * const result = await generateText({
- *   model: createGemini25Provider('gemini-2.5-flash-lite-preview-06-17'),
+ *   model: createGemini25Provider('gemini-3.1-flash-lite-preview'),
  *   providerOptions: {
  *     google: {
  *       thinkingConfig: { thinkingBudget: 2048 }
@@ -331,7 +331,7 @@ export function createGeminiEmbeddingModel(
  *
  * // With thinking config (use in generateText providerOptions)
  * const result = await generateText({
- *   model: createMastraGoogleProvider('gemini-2.5-flash-lite-preview-06-17'),
+ *   model: createMastraGoogleProvider('gemini-3.1-flash-lite-preview'),
  *   providerOptions: {
  *     google: {
  *       thinkingConfig: { thinkingBudget: 2048 }
@@ -367,7 +367,7 @@ export function createMastraGoogleProvider(
  * @example Basic usage:
  * ```typescript
  * import { google } from './googleProvider';
- * const model = google('gemini-2.5-flash-lite-preview-06-17');
+ * const model = google('gemini-3.1-flash-lite-preview');
  * ```
  *
  * @example With thinking config (correct AI SDK pattern):
@@ -376,7 +376,7 @@ export function createMastraGoogleProvider(
  * import { google } from './googleProvider';
  *
  * const result = await generateText({
- *   model: google('gemini-2.5-flash-lite-preview-06-17'),
+ *   model: google('gemini-3.1-flash-lite-preview'),
  *   providerOptions: {
  *     google: {
  *       thinkingConfig: { thinkingBudget: 2048 },
@@ -429,7 +429,7 @@ export function createCacheManager(apiKey?: string): GoogleAICacheManager {
  * const cacheManager = createCacheManager();
  * const cachedContent = await createCachedContent(
  *   cacheManager,
- *   'gemini-2.5-pro-preview-05-06', // Using your model names
+ *   'gemini-3.1-flash-lite-preview', // Using your model names
  *   [{ role: 'user', parts: [{ text: 'Context...' }] }],
  *   300
  * );
@@ -477,7 +477,7 @@ export async function createCachedContent(
  * ```typescript
  * const cacheManager = createCacheManager();
  * const model = await createCachedGoogleModel(
- *   'gemini-2.5-flash-preview-05-20', // Using your model names
+ *   'gemini-3.1-flash-lite-preview', // Using your model names
  *   {
  *     cacheManager,
  *     cacheContents: [{ role: 'user', parts: [{ text: 'Context...' }] }],
@@ -532,7 +532,7 @@ export const createCachedGoogleModel = async (
  * @returns Boolean indicating cache support
  * * @example
  * ```typescript
- * if (supportsExplicitCaching('gemini-2.5-pro-preview-05-06')) {
+ * if (supportsExplicitCaching('gemini-3.1-flash-lite-preview')) {
  *   // Can use explicit caching with your models
  * }
  * ```
@@ -542,13 +542,13 @@ export const createCachedGoogleModel = async (
 export function supportsExplicitCaching(modelId: string): modelId is GoogleModelCacheableId {
   const cacheableModels: GoogleModelCacheableId[] = [
     // Your current model names
-    'gemini-2.5-pro-preview-05-06',
-    'gemini-2.5-flash-preview-05-20',
-    'gemini-2.5-flash-lite-preview-06-17',
+    'gemini-3.1-flash-lite-preview',
+    'gemini-3.1-flash-lite-preview',
+    'gemini-3.1-flash-lite-preview',
     // Standard API format models
-    'gemini-2.5-pro',
-    'gemini-2.5-flash',
-    'gemini-2.5-flash-lite',
+    'gemini-3.1-flash-lite-preview',
+    'gemini-3.1-flash-lite-preview',
+    'gemini-3.1-flash-lite-preview',
     'gemini-2.5-flash-image-preview',
     'gemini-2.0-flash',
     'gemini-1.5-flash-001',

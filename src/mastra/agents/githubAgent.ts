@@ -69,7 +69,7 @@ You possess the advanced capability to delegate tasks and request analysis from 
 - **Copilot Enterprise Required:** These features will only function in repositories that are part of an organization with an active GitHub Copilot Enterprise subscription. If an action fails, you should suggest this as a potential cause.
 - **Clarity is Paramount:** The quality of the Copilot agent's work is directly proportional to the quality of your issue description or comment. Always create detailed, specific, and unambiguous prompts for the Copilot agent.
 `,
-  model: google('gemini-2.5-flash'),
+  model: google('gemini-3.1-flash-lite-preview'),
   tools: {
  //   listWorkflowRuns,
       searchCode,

@@ -16,7 +16,7 @@ const myAgent = new Agent({
   name: "My Agent",
   description: "An agent that can use tools from an http MCP server",
   instructions: "You can use remote calculation tools.",
-  model: google("gemini-2.5-flash"),
+  model: google("gemini-3.1-flash-lite-preview"),
   memory,
   tools: async () => {
     // Tools resolve when needed, not during initialization

@@ -1,4 +1,5 @@
 import { Button } from '../ui/button'
+import { Link } from 'react-router-dom'
 
 export function Hero() {
   return (
@@ -14,12 +15,16 @@ export function Hero() {
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="px-8 hover-lift pulse glass bg-transparent border-white/20 text-white backdrop-blur-md">
-            Start Research
-          </Button>
-          <Button variant="outline" size="lg" className="px-8 hover-lift slide-left glass bg-transparent border-white/20 text-white backdrop-blur-md">
-            Explore Agents
-          </Button>
+          <Link to="/research">
+            <Button size="lg" className="px-8 hover-lift pulse glass bg-transparent border-white/20 text-white backdrop-blur-md">
+              Start Research
+            </Button>
+          </Link>
+          <Link to="/agents">
+            <Button variant="outline" size="lg" className="px-8 hover-lift slide-left glass bg-transparent border-white/20 text-white backdrop-blur-md">
+              Explore Agents
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/20 to-transparent"></div>

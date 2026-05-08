@@ -60,13 +60,13 @@ logger.info("Embeddings generated", { output: embeddingEvent.output, type: embed
 //const store2 = new PostgresStore({ connectionString });
 
 const store = new PostgresStore({
-    connectionString: process.env.SUPABASE ?? "postgresql://user:password@localhost:5432/mydb",
+    connectionString: process.env.SUPABASE ?? "postgresql://arthrod@localhost:5432/ai_deepsearch",
     schemaName: 'mastra',
     max: 20, // use up to 20 connections
     idleTimeoutMillis: 30000, // close idle clients after 30 seconds
 });
 
-const pgVector = new PgVector({ connectionString: process.env.SUPABASE ?? "postgresql://user:password@localhost:5432/mydb", schemaName: 'mastra' });
+const pgVector = new PgVector({ connectionString: process.env.SUPABASE ?? "postgresql://arthrod@localhost:5432/ai_deepsearch", schemaName: 'mastra' });
 
 //await store.createIndex({
 //  name: 'idx_traces_attributes',

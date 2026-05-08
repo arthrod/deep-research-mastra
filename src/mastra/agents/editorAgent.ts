@@ -13,6 +13,6 @@ export const editorAgent = new Agent({
   name: "Editor",
   description: 'An editor agent that edits blog post copy to improve clarity, coherence, and overall quality.',
   instructions: "You are an editor agent that edits blog post copy.",
-  model: google('gemini-2.5-flash-lite'),
+  model: google('gemini-3.1-flash-lite-preview'),
   memory
 });

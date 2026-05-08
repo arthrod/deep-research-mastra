@@ -18,7 +18,7 @@ const logger = new PinoLogger({ name: 'RerankTool', level: 'info' });
 export interface RerankRuntimeContext {
   'user-id'?: string;
   'session-id'?: string;
-  'model-preference'?: 'gemini-2.5-flash-lite' | 'gemini-2.5-preview-05-20' | 'gemini-2.0-flash' | 'gemini-2.0-flash-lite';
+  'model-preference'?: 'gemini-3.1-flash-lite-preview' | 'gemini-2.5-preview-05-20' | 'gemini-2.0-flash' | 'gemini-2.0-flash-lite';
   'semantic-weight'?: number;
   'vector-weight'?: number;
   'position-weight'?: number;
@@ -86,7 +86,7 @@ export const rerankTool = createTool({
       const rawModelPreference = runtimeContext?.get('model-preference');
       const modelPreference = (typeof rawModelPreference === 'string' && rawModelPreference.length > 0)
         ? rawModelPreference
-        : 'gemini-2.5-flash-lite-preview-06-17';
+        : 'gemini-3.1-flash-lite-preview';
 
       // Validate and coerce runtimeContext values to concrete types to satisfy TypeScript
       const rawSemanticWeight = runtimeContext?.get('semantic-weight');
@@ -312,7 +312,7 @@ export const rerankTool = createTool({
  * Runtime context instance for rerank tool with defaults
  */
 export const rerankRuntimeContext = new RuntimeContext<RerankRuntimeContext>();
-rerankRuntimeContext.set('model-preference', 'gemini-2.5-flash-lite');
+rerankRuntimeContext.set('model-preference', 'gemini-3.1-flash-lite-preview');
 rerankRuntimeContext.set('semantic-weight', 0.6);
 rerankRuntimeContext.set('vector-weight', 0.3);
 rerankRuntimeContext.set('position-weight', 0.1);

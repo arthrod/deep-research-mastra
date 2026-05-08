@@ -15,7 +15,7 @@ export const voiceAgent = new Agent({
  instructions: 'You are a helpful assistant with real - time voice capabilities.',
  memory: createResearchMemory(),
  // Model used for text generation; voice provider handles realtime audio
- model: google('gemini-2.5-flash'),
+ model: google('gemini-3.1-flash-lite-preview'),
  voice: new GeminiLiveVoice({
  apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
  model: 'gemini-live-2.5-flash-preview-native-audio',

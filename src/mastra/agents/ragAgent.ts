@@ -78,7 +78,7 @@ ${LIBSQL_PROMPT}
     keywordCoverage: new KeywordCoverageMetric(), // Keywords will be provided at runtime for evaluation
     toneConsistency: new ToneConsistencyMetric(),
   },
-  model: gemini('gemini-2.5-flash',),
+  model: gemini('gemini-3.1-flash-lite-preview',),
   tools: {
 //    vectorQueryTool,
 //    chunkerTool,
