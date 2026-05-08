@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { Button } from '../ui/button'
 
 const navItems = [
@@ -6,10 +6,10 @@ const navItems = [
   { path: '/research', label: 'Research' },
   { path: '/agents', label: 'Agents' },
   { path: '/workflows', label: 'Workflows' },
-]
+] as const
 
 export function Header() {
-  const location = useLocation()
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
 
   return (
     <header className="bg-white shadow-sm border-b">
@@ -23,7 +23,7 @@ export function Header() {
               <Button
                 key={item.path}
                 asChild
-                variant={location.pathname === item.path ? "default" : "ghost"}
+                variant={pathname === item.path ? 'default' : 'ghost'}
                 className="px-3 py-2"
               >
                 <Link to={item.path}>{item.label}</Link>
