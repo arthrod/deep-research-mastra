@@ -76,7 +76,14 @@ const proxyToMastra = async (
   if (!['GET', 'HEAD'].includes(c.req.method)) {
     init.body = await c.req.raw.arrayBuffer()
   }
-  return fetch(upstream.toString(), init)
+  try {
+    return await fetch(upstream.toString(), init)
+  } catch {
+    return new Response(
+      JSON.stringify({ error: 'Upstream Mastra service unreachable' }),
+      { status: 502, headers: { 'content-type': 'application/json' } },
+    )
+  }
 }
 
 api.get('/agents', (c) => proxyToMastra(c, '/api'))
