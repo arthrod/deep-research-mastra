@@ -156,7 +156,7 @@
     "tw-animate-css": "^1.3.8",
     "typescript": "^5.9.2",
     "vite": "^7.1.5",
-    "vitest": "^3.2.4"
+    "vitest": "^4.1.0"
   },
   "overrides": {
     "jsondiffpatch": "0.7.3",
